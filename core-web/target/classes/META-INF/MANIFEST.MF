@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: guilherme
+Build-Jdk: 1.7.0_15
+Specification-Title: Core-Web
+Specification-Version: 1.0.0.RELEASE
+Implementation-Title: Core-Web
+Implementation-Version: 1.0.0.RELEASE
+Implementation-Vendor-Id: br.com.sourcesphere
+Created-By: Maven Integration for Eclipse
+
