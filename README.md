@@ -1,4 +1,4 @@
 Core-Web
 ========
 
-Core framwork for web
+Core framework for web
