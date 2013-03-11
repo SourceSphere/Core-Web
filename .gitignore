@@ -9,14 +9,14 @@
 .metadata/
 
 # Eclipse Settings #
-/Core-Web/.settings/
-/Core-Web/.classpath
-/Core-Web/.project
+/core-web/.settings/
+/core-web/.classpath
+/core-web/.project
 
 # Tomcat Server #
 /Servers
 /Servers/
 
 # Compiled Sources #
-Core-Web/bin/
-Core-Web/target/
+core-web/bin/
+core-web/target/
