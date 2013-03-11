@@ -1,6 +1,7 @@
 package br.com.sourcesphere.core.web.generic.dao;
 
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,6 @@ import org.hibernate.Transaction;
 import org.hibernate.exception.ConstraintViolationException;
 
 import br.com.sourcesphere.core.util.Assert;
-import br.com.sourcesphere.core.util.GenericTypeResolver;
 import br.com.sourcesphere.core.web.generic.dao.exception.DaoException;
 import br.com.sourcesphere.core.web.generic.dao.exception.DaoInitializationException;
 import br.com.sourcesphere.core.web.generic.dao.exception.EntityAlreadyExistException;
@@ -55,14 +55,21 @@ public abstract class MasterDao<T>
 	 * @param sessionFactory - The sessionFactory dependency
 	 * @throws DaoInitializationException - if the sessionFactory is empty
 	 */
-	@SuppressWarnings("unchecked")
 	public MasterDao(SessionFactory sessionFactory)
 	{
 		assertion.setExceptionType(DaoInitializationException.class);
 		assertion.notNull(sessionFactory);
 		this.sessionFactory = sessionFactory;
-		this.clazzType = (Class<T>) GenericTypeResolver.resolveTypeArgument(getClass(), MasterDao.class);
+		this.clazzType = resolveGeneric();
 		assertion.setExceptionType(DaoException.class);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private Class<T> resolveGeneric()
+	{
+		return (Class<T>) ((ParameterizedType) getClass()
+				.getGenericSuperclass())
+				.getActualTypeArguments()[0];
 	}
 	
 	/**
