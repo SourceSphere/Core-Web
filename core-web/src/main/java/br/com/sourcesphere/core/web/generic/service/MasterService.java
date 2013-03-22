@@ -9,6 +9,7 @@ import br.com.sourcesphere.core.web.generic.controller.MasterController;
 import br.com.sourcesphere.core.web.generic.dao.MasterDao;
 import br.com.sourcesphere.core.web.generic.dao.exception.DaoException;
 import br.com.sourcesphere.core.web.generic.dao.exception.EntityAlreadyExistException;
+import br.com.sourcesphere.core.web.generic.dao.exception.EntityNotFoundException;
 import br.com.sourcesphere.core.web.generic.service.exception.ServiceException;
 
 /**
@@ -119,6 +120,10 @@ public abstract class MasterService<T>
 		try
 		{
 			return dao.get(identifier);
+		}
+		catch(EntityNotFoundException e)
+		{
+			throw e;
 		}
 		catch(DaoException e)
 		{

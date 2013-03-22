@@ -137,14 +137,12 @@ public abstract class MasterDao<T>
 	@SuppressWarnings("unchecked")
 	public T get(Serializable identifier)
 	{
-		assertion.notNull(identifier);
+		assertion.notNull(identifier, "The identifier must not be null");
 		T entity = null;
 		try
 		{
 			begin();
 			entity = (T) getSession().get(clazzType, identifier);
-			if(entity == null) 
-				throw new EntityNotFoundException("Unnable to find the entity '"+clazzType.getSimpleName()+"' with an identifier equals to '"+identifier+"'");
 			commit();
 		}
 		catch(Exception e)
@@ -158,6 +156,8 @@ public abstract class MasterDao<T>
 		{
 			close();
 		}
+		if(entity == null) 
+			throw new EntityNotFoundException("Unnable to find the entity '"+clazzType.getSimpleName()+"' with an identifier equals to '"+identifier+"'");
 		return entity;
 	}
 	
